@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "encurtadorURL",
+    "slug": "encurtadorURL",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

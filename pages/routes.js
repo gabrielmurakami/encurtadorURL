@@ -14,7 +14,11 @@ export default function Routes() {
         component={Home}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="LastGenerated" component={LastGenerated} />
+      <Stack.Screen
+        name="LastGenerated"
+        component={LastGenerated}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

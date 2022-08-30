@@ -9,14 +9,16 @@ import {
   Keyboard,
   TouchableOpacity,
 } from "react-native";
-//import Clipboard from "@react-native-clipboard/clipboard";
+import { FontAwesome } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
   const [urlFinal, setUrlFinal] = useState("");
   const key = "b7bfe323a38189b457655f2d4ec31cd0";
+  const navigation = useNavigation();
 
   const short = async () => {
     Keyboard.dismiss();
@@ -57,6 +59,12 @@ export default function Home() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.logo}
+            onPress={() => navigation.navigate("LastGenerated")}
+          >
+            <FontAwesome name="history" size={28} color="black" />
+          </TouchableOpacity>
           <Text style={styles.title}>
             url
             <Text style={{ color: "#1076f7" }}>Shortener</Text>
@@ -67,16 +75,16 @@ export default function Home() {
             keyboardType="url"
             onChangeText={(text) => setUrl(text)}
             value={url}
-            placeholder="Digite a url..."
+            placeholder="Your url..."
           />
           <TextInput
             style={styles.urlInput}
             onChangeText={(text) => setName(text)}
             value={name}
-            placeholder="Nome personalizado"
+            placeholder="Name custom"
           />
           <TouchableOpacity style={styles.shortBtn} onPress={() => short()}>
-            <Text style={{ color: "#fff" }}>Encurtar</Text>
+            <Text style={{ color: "#fff" }}>Shorten</Text>
           </TouchableOpacity>
           {urlFinal === "" ? (
             <TouchableWithoutFeedback
@@ -134,5 +142,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 20,
     textAlign: "center",
+  },
+
+  logo: {
+    position: "absolute",
+    top: "10%",
+    right: "13%",
   },
 });

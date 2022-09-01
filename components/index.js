@@ -1,1 +1,2 @@
-export * from './GoBack'
+export * from "./CleanHistory";
+export * from "./TabNavigation";

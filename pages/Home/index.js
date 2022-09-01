@@ -59,12 +59,6 @@ export default function Home() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.logo}
-            onPress={() => navigation.navigate("LastGenerated")}
-          >
-            <FontAwesome name="history" size={28} color="black" />
-          </TouchableOpacity>
           <Text style={styles.title}>
             url
             <Text style={{ color: "#1076f7" }}>Shortener</Text>
@@ -74,11 +68,13 @@ export default function Home() {
             autoCapitalize="none"
             keyboardType="url"
             onChangeText={(text) => setUrl(text)}
+            placeholderTextColor="#808B96"
             value={url}
             placeholder="Your url..."
           />
           <TextInput
             style={styles.urlInput}
+            placeholderTextColor="#808B96"
             onChangeText={(text) => setName(text)}
             value={name}
             placeholder="Name custom"

@@ -1,10 +1,32 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet } from "react-native";
+//import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TabNavigation } from "../components";
 
 import Home from "./Home";
-import LastGenerated from "./LastGenerated";
+import Historic from "./Historic";
 
-const Stack = createNativeStackNavigator();
+const Stack = createBottomTabNavigator();
+
+export default function Routes() {
+  return (
+    <Stack.Navigator tabBar={(props) => <TabNavigation {...props} />}>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Historic"
+        component={Historic}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+/* const Stack = createNativeStackNavigator();
 
 export default function Routes() {
   return (
@@ -22,3 +44,4 @@ export default function Routes() {
     </Stack.Navigator>
   );
 }
+ */

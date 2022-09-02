@@ -9,16 +9,25 @@ import {
   Keyboard,
   TouchableOpacity,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
   const [urlFinal, setUrlFinal] = useState("");
-  const key = "b7bfe323a38189b457655f2d4ec31cd0";
-  const navigation = useNavigation();
+  const key = "c91f8d6cb16c28620cbdebbcde72474e";
+
+  const saveURL = async (value) => {
+    try {
+      const jsonresponse = JSON.stringify(value);
+      await AsyncStorage.setItem("urlKey", jsonresponse);
+      console.log("deu certo " + jsonresponse);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const short = async () => {
     Keyboard.dismiss();
@@ -29,6 +38,7 @@ export default function Home() {
         const data = await response.json();
         if (data.url.status === 3) {
           alert("Esse link já está em uso.");
+          console.log({ data });
           return;
         }
         if (data.url.status === 2) {
@@ -39,6 +49,7 @@ export default function Home() {
         setUrlFinal(data.url.shortLink);
         setUrl("");
         setName("");
+        saveURL(url);
       });
 
       return;

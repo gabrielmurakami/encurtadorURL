@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,49 +7,38 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { CleanHistory } from "../../components";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LastGenerated() {
-  const historic = [
-    {
-      id: 1,
-      url: "https://link.com/link",
-    },
-    {
-      id: 2,
-      url: "https://link.com/link",
-    },
-    {
-      id: 3,
-      url: "https://link.com/link",
-    },
-    {
-      id: 4,
-      url: "https://link.com/link",
-    },
-    {
-      id: 5,
-      url: "https://link.com/link",
-    },
-    {
-      id: 6,
-      url: "https://link.com/link",
-    },
-  ];
+  const getData = async () => {
+    try {
+      const jsonresponse = await AsyncStorage.getItem("urlKey");
+      jsonresponse != null ? JSON.parse(jsonresponse) : null;
+      console.log({jsonresponse});
+      return;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <View style={styles.container}>
       <CleanHistory />
       <Text style={styles.title}>Historic</Text>
-      <FlatList
+      {/*       <FlatList
         style={styles.list}
         data={historic}
-        keyExtractor={(item) => String(item.id)}
+        keyExtractor={(item) => String(item)}
         renderItem={({ item }) => (
           <TouchableOpacity>
-            <Text style={styles.text}>{item.url}</Text>
+            <Text style={styles.text}>{item}</Text>
           </TouchableOpacity>
         )}
-      />
+      /> */}
     </View>
   );
 }

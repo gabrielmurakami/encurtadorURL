@@ -4,8 +4,8 @@ import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabNavigation } from "../components";
 
-import Home from "./Home";
-import Historic from "./Historic";
+import Home from "../pages/Home";
+import Historic from "../pages/Historic";
 
 const Stack = createBottomTabNavigator();
 

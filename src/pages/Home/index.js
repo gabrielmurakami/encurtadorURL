@@ -10,19 +10,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
-import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
   const [urlFinal, setUrlFinal] = useState("");
+  const [storageList, setStorageList] = useState([]);
   const key = "c91f8d6cb16c28620cbdebbcde72474e";
 
   const saveURL = async (value) => {
+    const itemList = { url: value };
+
     try {
-      const jsonresponse = JSON.stringify(value);
-      await AsyncStorage.setItem("urlKey", jsonresponse);
+      storageList.push(itemList);
+      const jsonresponse = JSON.stringify(storageList);
+      await AsyncStorage.setItem("itemList", jsonresponse);
       console.log("deu certo " + jsonresponse);
     } catch (e) {
       console.log(e);
@@ -47,9 +50,9 @@ export default function Home() {
         }
 
         setUrlFinal(data.url.shortLink);
+        saveURL(url);
         setUrl("");
         setName("");
-        saveURL(url);
       });
 
       return;

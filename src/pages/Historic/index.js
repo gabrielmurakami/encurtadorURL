@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,12 +10,14 @@ import { CleanHistory } from "../../components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LastGenerated() {
+  const [historic, setHistoric] = useState();
+
   const getData = async () => {
     try {
-      const jsonresponse = await AsyncStorage.getItem("urlKey");
-      jsonresponse != null ? JSON.parse(jsonresponse) : null;
-      console.log({jsonresponse});
-      return;
+      const jsonresponse = await AsyncStorage.getItem("itemList");
+      // jsonresponse != null ? JSON.parse(jsonresponse) : null;
+      console.log(jsonresponse);
+      jsonresponse.map((index, url) => console.log(url));
     } catch (e) {
       console.log(e);
     }
@@ -29,6 +31,7 @@ export default function LastGenerated() {
     <View style={styles.container}>
       <CleanHistory />
       <Text style={styles.title}>Historic</Text>
+
       {/*       <FlatList
         style={styles.list}
         data={historic}
